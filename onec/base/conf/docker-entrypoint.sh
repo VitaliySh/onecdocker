@@ -161,7 +161,21 @@ elif [ "$1" = 'apache' ]; then
     setPermissions
     setEncoding
     
+    #https://partners.v8.1c.ru/forum/message/1609696#m_1609696
+    #Для возможности получения http сервисов из $.ajax
+    #надо 200 отправлять на запрос OPTIONS - платформа этого не делает по умолчанию. 
+    # ```
+    # # Added a rewrite to respond with a 200 SUCCESS on every OPTIONS request.
+    # RewriteEngine On
+    # RewriteCond %{REQUEST_METHOD} OPTIONS
+    # RewriteRule ^(.*)$ $1 [R=200,L]
+    # Options +FollowSymlinks
+    #```
+    # для работы необходимы модули headers и rewrite
+
     a2enmod headers
+    a2enmod rewrite
+
     sed -ri 's/^export ([^=]+)=(.*)$/: ${\1:=\2}\nexport \1/' /etc/apache2/envvars
     
     APACHERUNUSER="${APACHE_RUN_USER:-www-data}"
