@@ -224,8 +224,8 @@ elif [ "$1" = 'debug' ]; then
             pwd=""
     fi
     #/opt/1C/v8.3/i386/dbgs --daemon --addr=0.0.0.0 --port=1550 --notify=/tmp/llog.txt -pwd 
-    echo "gosu $ONECGROUP $oneC_root/dbgs --addr=$addr --port=$port --notify=/tmp/dbsg.txt $pwd"
-    exec gosu $ONECUSER $oneC_root/dbgs --addr="$addr" --port="$port" --notify=/tmp/dbsg.txt "$pwd"
+    echo "gosu $ONECUSER $oneC_root/dbgs --addr=${addr} --port=${port} ${pwd}"
+    exec gosu $ONECUSER $oneC_root/dbgs --addr=${addr} --port=${port} ${pwd}
 
 else
     exec "$@"
