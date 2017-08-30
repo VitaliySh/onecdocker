@@ -80,7 +80,7 @@ Vagrant.configure(2) do |config|
     pkg_cmd << "usermod -a -G docker vagrant; "
     config.vm.provision :shell, :inline => pkg_cmd
   end
-  config.vm.provision "shell", path: "./tools/enableexperemintal.sh"
+  #config.vm.provision "shell", path: "./tools/enableexperemintal.sh"
   pkg_cmd = "apt-get install dnsmasq wget python3-pip python3-all-dev -y -q; "
   #pkg_cmd << "echo server=/consul./127.0.0.1#8600 > /etc/dnsmasq.d/10-consul ;"
   #pkg_cmd << "server=/33.168.192.in-addr.arpa/127.0.0.1#8600 > /etc/dnsmasq.d/11-consularpa ;"
